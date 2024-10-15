@@ -15,3 +15,5 @@ with open('large_data.csv', 'w', newline='') as csvfile:
         status = random.choice(statuses)
         value = random.uniform(0, 1000)
         writer.writerow([i, date.strftime('%Y-%m-%d'), status, value])
+        if (i + 1) % 1000000 == 0:
+            print(f"Written {i + 1} of {num_rows} rows ({((i + 1) / num_rows) * 100:.2f}%)")

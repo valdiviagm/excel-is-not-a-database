@@ -32,10 +32,13 @@ for i in range(num_rows):
         c.executemany('INSERT INTO data VALUES (?, ?, ?, ?)', data)
         conn.commit()
         data = []
+        if (i + 1) % 1000000 == 0:
+            print(f"Inserted {i + 1} of {num_rows} rows ({((i + 1) / num_rows) * 100:.2f}%)")
 
 # Insert any remaining data
 if data:
     c.executemany('INSERT INTO data VALUES (?, ?, ?, ?)', data)
     conn.commit()
 
+print("Data generation complete.")
 conn.close()
